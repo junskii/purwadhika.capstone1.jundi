@@ -174,7 +174,16 @@ def update():
             print("Invalid, please enter Male or Female.")
 
     # age
-    age = input(f"Age: ({patientData[patient_ID]['Age']}): ")
+    while True:
+        age = input(f"Age: ({patientData[patient_ID]['Age']}): ")
+        if not age:
+            age = patientData[patient_ID]['Age']  # Jika kosong, gunakan umur lama
+            break
+        elif age.isdigit() and 0 <= int(age) <= 120:  # Validasi input umur
+            age = int(age)
+            break  # Keluar dari loop jika input valid
+        else:
+            print("Invalid input. Please enter a valid age between 0 and 120.")
     
     # address
     address = input(f"Address: ({patientData[patient_ID]['Address']}): ")
